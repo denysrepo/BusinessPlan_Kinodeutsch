@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="de" style="margin: 0; padding: 0; height: 100%; overflow: hidden;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanzprognosen - KinoDeutsch</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="fixed-sizing.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+            margin: 0;
+            padding: 1.5rem;
+        }
+        
+        .red-accent { color: #DC2626; }
+        .red-bg { background-color: #DC2626; }
+        .card-dark {
+            background: rgba(31, 41, 55, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(220, 38, 38, 0.2);
+        }
+        
+        .fade-in { animation: fadeIn 1s ease-in-out; }
+        .slide-up { animation: slideUp 0.8s ease-out; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .finance-card {
+            background: linear-gradient(135deg, rgba(31, 41, 55, 0.9), rgba(55, 65, 81, 0.9));
+            border: 2px solid rgba(220, 38, 38, 0.3);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden; margin: 0; padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .finance-card:hover {
+            transform: translateY(-5px);
+            border-color: #DC2626;
+            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.4);
+        }
+        
+        .finance-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #DC2626, #B91C1C);
+        }
+        
+        .investment-table {
+            background: rgba(31, 41, 55, 0.8);
+            border-radius: 0.75rem;
+            overflow: hidden; margin: 0; padding: 1.5rem;
+        }
+        
+        .table-header {
+            background: #DC2626;
+            color: white;
+            padding: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .table-row {
+            border-bottom: 1px solid rgba(75, 85, 99, 0.3);
+            padding: 0.5rem 0.75rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr 2fr;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        
+        .milestone-item {
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        
+        .milestone-item:hover {
+            background: rgba(220, 38, 38, 0.2);
+            border-color: #DC2626;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 200px;
+            margin: 1rem 0;
+        }
+        
+        .goal-highlight {
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+            padding: 1rem;
+            border-radius: 1rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .funding-breakdown {
+            background: linear-gradient(135deg, #3B82F6, #1D4ED8);
+            color: white;
+            padding: 1rem;
+            border-radius: 1rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; overflow: hidden;">
+    <div class="slide-container">
+        <div class="content-wrapper">
+            <!-- Header -->
+            <div class="mb-4 fade-in">
+                <h1 class="slide-title font-bold red-accent mb-2">Finanzprognosen</h1>
+                <div class="w-24 h-1 red-bg mb-2"></div>
+                <p class="slide-text text-gray-300">CAPEX-Bedarf für MVP-Launch und erste 1000 Nutzer</p>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="responsive-grid grid-2-cols flex-1">
+            <!-- Left Column: CAPEX Breakdown -->
+            <div class="finance-card slide-up">
+                <h2 class="text-2xl font-bold text-white mb-4">
+                    <i class="fas fa-rocket red-accent mr-2"></i>
+                    CAPEX-Aufschlüsselung (146.600€)
+                </h2>
+                
+                <div class="investment-table">
+                    <div class="table-header">
+                        <div class="table-row">
+                            <span>Kategorie</span>
+                            <span>Betrag</span>
+                            <span>Verwendung</span>
+                        </div>
+                    </div>
+                    
+                    <div class="text-white text-sm">
+                        <div class="table-row">
+                            <span>MVP-Plattform</span>
+                            <span class="text-green-400">15.000€</span>
+                            <span>Backend, React-SPA, Mobile-Shell</span>
+                        </div>
+                        <div class="table-row">
+                            <span>Content-Produktion</span>
+                            <span class="text-green-400">25.000€</span>
+                            <span>60 Stunden Videokontent</span>
+                        </div>
+                        <div class="table-row">
+                            <span>Team-Gehälter (6 Monate)</span>
+                            <span class="text-green-400">77.400€</span>
+                            <span>12.900€ brutto/Monat × 6 Monate</span>
+                        </div>
+                        <div class="table-row">
+                            <span>Marketing-Launch</span>
+                            <span class="text-green-400">10.000€</span>
+                            <span>Trailer, Influencer-Events, CRM</span>
+                        </div>
+                        <div class="table-row">
+                            <span>Reserve (15%)</span>
+                            <span class="text-yellow-400">19.200€</span>
+                            <span>Unvorhergesehene Ausgaben</span>
+                        </div>
+                        <div class="table-row font-bold">
+                            <span>Gesamt CAPEX</span>
+                            <span class="text-red-400">146.600€</span>
+                            <span>Gesamtfinanzierungsbedarf</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="funding-breakdown">
+                    <h3 class="text-lg font-bold mb-3">Finanzierungsstruktur:</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold">100.000€</div>
+                            <div class="text-sm">Investoren</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold">46.600€</div>
+                            <div class="text-sm">Eigenes Kapital</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="goal-highlight">
+                    <h3 class="text-lg font-bold mb-2">Ziel bis Ende 2025:</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <div class="text-2xl font-bold">1.000</div>
+                            <div class="text-sm">Erste Nutzer</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold">Oktober</div>
+                            <div class="text-sm">MVP-Launch</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Timeline & Milestones -->
+            <div class="finance-card slide-up" style="animation-delay: 0.2s;">
+                <h2 class="text-2xl font-bold text-white mb-4">
+                    <i class="fas fa-calendar red-accent mr-2"></i>
+                    Entwicklungs-Timeline
+                </h2>
+                
+                <div class="space-y-3">
+                    <div class="milestone-item">
+                        <div class="flex items-center justify-between">
+                            <span class="font-semibold text-white">Q2 2025 (Jetzt)</span>
+                            <span class="text-green-400">Investment</span>
+                        </div>
+                        <div class="text-xs text-gray-300 mt-1">
+                            100.000€ Investoren + 46.600€ Eigenkapital
+                        </div>
+                    </div>
+                    
+                    <div class="milestone-item">
+                        <div class="flex items-center justify-between">
+                            <span class="font-semibold text-white">Q3 2025</span>
+                            <span class="text-yellow-400">Entwicklung</span>
+                        </div>
+                        <div class="text-xs text-gray-300 mt-1">
+                            MVP-Entwicklung • Content-Produktion (60h Video)
+                        </div>
+                    </div>
+                    
+                    <div class="milestone-item">
+                        <div class="flex items-center justify-between">
+                            <span class="font-semibold text-white">Oktober 2025</span>
+                            <span class="text-green-400">Launch</span>
+                        </div>
+                        <div class="text-xs text-gray-300 mt-1">
+                            MVP-Launch • Marketing-Start • Beta-Tests
+                        </div>
+                    </div>
+                    
+                    <div class="milestone-item">
+                        <div class="flex items-center justify-between">
+                            <span class="font-semibold text-white">Q4 2025</span>
+                            <span class="text-blue-400">Wachstum</span>
+                        </div>
+                        <div class="text-xs text-gray-300 mt-1">
+                            Erste 1000 Nutzer • Monetarisierung startet
+                        </div>
+                    </div>
+                    
+                    <div class="milestone-item">
+                        <div class="flex items-center justify-between">
+                            <span class="font-semibold text-white">2026+</span>
+                            <span class="text-purple-400">Skalierung</span>
+                        </div>
+                        <div class="text-xs text-gray-300 mt-1">
+                            OPEX durch Umsatz gedeckt • Internationale Expansion
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="fundingChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Section: Key Metrics -->
+        <div class="mt-6 grid grid-cols-4 gap-6 fade-in" style="animation-delay: 0.4s;">
+            <div class="finance-card text-center">
+                <div class="w-16 h-16 red-bg rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-handshake text-2xl text-white"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">100.000€</h3>
+                <p class="text-sm text-gray-400">Investment benötigt</p>
+            </div>
+            
+            <div class="finance-card text-center">
+                <div class="w-16 h-16 red-bg rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-piggy-bank text-2xl text-white"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">46.600€</h3>
+                <p class="text-sm text-gray-400">Eigenes Kapital</p>
+            </div>
+            
+            <div class="finance-card text-center">
+                <div class="w-16 h-16 red-bg rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-play text-2xl text-white"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">60 Stunden</h3>
+                <p class="text-sm text-gray-400">Videokontent für Launch</p>
+            </div>
+            
+            <div class="finance-card text-center">
+                <div class="w-16 h-16 red-bg rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-calendar text-2xl text-white"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Oktober</h3>
+                <p class="text-sm text-gray-400">MVP-Launch geplant</p>
+            </div>
+        </div>
+
+        <script>
+            // Funding Chart
+            const fundingCtx = document.getElementById('fundingChart').getContext('2d');
+            new Chart(fundingCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Investoren', 'Eigenkapital'],
+                    datasets: [{
+                        data: [100000, 46600],
+                        backgroundColor: ['#DC2626', '#3B82F6'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { color: '#FFFFFF' }
+                        }
+                    }
+                }
+            });
+        </script>
+        </div>
+    </div>
+<script src="navigation.js"></script></body>
+</html>
+

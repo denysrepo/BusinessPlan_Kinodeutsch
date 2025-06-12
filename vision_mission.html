@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="de" style="margin: 0; padding: 0; height: 100%; overflow: hidden;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision & Mission - KinoDeutsch</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="fixed-sizing.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden; margin: 0; padding: 1.5rem;
+        }
+        
+        .red-accent { color: #DC2626; }
+        .red-bg { background-color: #DC2626; }
+        .card-dark {
+            background: rgba(31, 41, 55, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(220, 38, 38, 0.2);
+        }
+        
+        .fade-in { animation: fadeIn 1.5s ease-in-out; }
+        .slide-up { animation: slideUp 1s ease-out; }
+        .pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(220, 38, 38, 0.6); }
+        }
+        
+        .vision-card {
+            background: linear-gradient(135deg, rgba(31, 41, 55, 0.9), rgba(55, 65, 81, 0.9));
+            border: 2px solid rgba(220, 38, 38, 0.4);
+            border-radius: 2rem;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden; margin: 0; padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .vision-card:hover {
+            transform: translateY(-10px);
+            border-color: #DC2626;
+        }
+        
+        .vision-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #DC2626, #B91C1C, #DC2626);
+        }
+        
+        .mission-card {
+            background: linear-gradient(135deg, rgba(55, 65, 81, 0.9), rgba(75, 85, 99, 0.9));
+            border: 2px solid rgba(220, 38, 38, 0.3);
+            border-radius: 2rem;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden; margin: 0; padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .mission-card:hover {
+            transform: translateY(-10px);
+            border-color: #DC2626;
+        }
+        
+        .mission-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #B91C1C, #DC2626, #B91C1C);
+        }
+        
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .quote-mark {
+            font-size: 4rem;
+            color: #DC2626;
+            opacity: 0.3;
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+        }
+        
+        .impact-stat {
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .impact-stat:hover {
+            background: rgba(220, 38, 38, 0.2);
+            border-color: #DC2626;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; overflow: hidden;">
+    <div class="slide-container flex flex-col">
+        <!-- Floating Background Elements -->
+        <div class="floating-element" style="top: 10%; left: 5%; animation-delay: 0s;">
+            <i class="fas fa-film text-6xl text-red-600"></i>
+        </div>
+        <div class="floating-element" style="top: 20%; right: 10%; animation-delay: 2s;">
+            <i class="fas fa-heart text-4xl text-red-600"></i>
+        </div>
+        <div class="floating-element" style="bottom: 30%; left: 15%; animation-delay: 4s;">
+            <i class="fas fa-users text-5xl text-red-600"></i>
+        </div>
+        <div class="floating-element" style="bottom: 15%; right: 5%; animation-delay: 1s;">
+            <i class="fas fa-comments text-4xl text-red-600"></i>
+        </div>
+
+        <!-- Header -->
+        <div class="mb-8 fade-in text-center">
+            <h1 class="text-6xl font-bold red-accent mb-4">Vision & Mission</h1>
+            <div class="w-32 h-1 red-bg mx-auto mb-6"></div>
+            <p class="text-2xl text-gray-300">Die Zukunft des Deutschlernens</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 ga flex-1">
+            <!-- Vision Section -->
+            <div class="vision-card slide-up pulse-glow">
+                <div class="quote-mark">"</div>
+                <div class="relative z-10">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 red-bg rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-eye text-2xl text-white"></i>
+                        </div>
+                        <h2 class="text-4xl font-bold text-white">Vision</h2>
+                    </div>
+                    
+                    <div class="text-2xl text-gray-200 leading-relaxed mb-6">
+                        Wir machen Deutsch zugänglich und schaffen einen <span class="red-accent font-semibold">sicheren Raum</span> mit lebendigem gesprochenem Deutsch, <span class="red-accent font-semibold">die im Alltag wirklich notwendig ist</span>, und <span class="red-accent font-semibold">sofortiger Wort-Reaktion</span>. Durch Community-Aufbau, einfache Gesprächsführung und unmittelbares Verstehen der Serienschauspieler fördern wir <span class="red-accent font-semibold">schnellen Wortschatz-Aufbau</span> und <span class="red-accent font-semibold">Liebe zur deutschen Sprache</span>.
+                    </div>
+                    
+                    <div class="grid grid-cols-4 gap-4 mt-8">
+                        <div class="impact-stat">
+                            <div class="text-2xl font-bold red-accent">Sicher</div>
+                            <div class="text-sm text-gray-400">Lernraum</div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="text-2xl font-bold red-accent">Alltag</div>
+                            <div class="text-sm text-gray-400">Notwendig</div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="text-2xl font-bold red-accent">Sofort</div>
+                            <div class="text-sm text-gray-400">Verständnis</div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="text-2xl font-bold red-accent">Liebe</div>
+                            <div class="text-sm text-gray-400">zur Sprache</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission Section -->
+            <div class="mission-card slide-up" style="animation-delay: 0.3s;">
+                <div class="quote-mark">"</div>
+                <div class="relative z-10">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 red-bg rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-rocket text-2xl text-white"></i>
+                        </div>
+                        <h2 class="text-4xl font-bold text-white">Mission</h2>
+                    </div>
+                    
+                    <div class="text-3xl text-gray-200 leading-relaxed text-center">
+                        <span class="red-accent font-semibold">Für alle Deutschlernende den Alltag erleichtern.</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-6 mt-8">
+                        <div class="text-center">
+                            <div class="w-20 h-20 red-bg rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-globe text-3xl text-white"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">Für alle</h3>
+                            <p class="text-sm text-gray-400">Globale Zugänglichkeit</p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="w-20 h-20 red-bg rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-graduation-cap text-3xl text-white"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">Deutschlernende</h3>
+                            <p class="text-sm text-gray-400">Zielgruppe im Fokus</p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="w-20 h-20 red-bg rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-heart text-3xl text-white"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">Alltag erleichtern</h3>
+                            <p class="text-sm text-gray-400">Praktischer Nutzen</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Impact Statement -->
+        <div class="mt-8 text-center fade-in" style="animation-delay: 0.6s;">
+            <div class="inline-block bg-gradient-to-r from-red-600 to-red-800 text-white px-8 py-4 rounded-full">
+                <span class="text-xl font-bold">KinoDeutsch wird das weltweit führende Story-Verse für Sprachkompetenz</span>
+            </div>
+        </div>
+    </div>
+<script src="navigation.js"></script></body>
+</html>
+

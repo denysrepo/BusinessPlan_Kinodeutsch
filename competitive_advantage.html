@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="de" style="margin: 0; padding: 0; height: 100%; overflow: hidden;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wettbewerbsvorteile - KinoDeutsch</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="fixed-sizing.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden; margin: 0; padding: 1.5rem;
+        }
+        
+        .red-accent { color: #DC2626; }
+        .red-bg { background-color: #DC2626; }
+        .card-dark {
+            background: rgba(31, 41, 55, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(220, 38, 38, 0.2);
+        }
+        
+        .fade-in { animation: fadeIn 1s ease-in-out; }
+        .slide-up { animation: slideUp 0.8s ease-out; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .advantage-card {
+            background: linear-gradient(135deg, rgba(31, 41, 55, 0.9), rgba(55, 65, 81, 0.9));
+            border: 2px solid rgba(220, 38, 38, 0.3);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden; margin: 0; padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .advantage-card:hover {
+            transform: translateY(-5px);
+            border-color: #DC2626;
+            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.4);
+        }
+        
+        .advantage-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #DC2626, #B91C1C);
+        }
+        
+        .swot-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .swot-card {
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            position: relative;
+        }
+        
+        .strengths { 
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2)); 
+            border: 2px solid #10B981;
+            grid-row: span 2;
+        }
+        .weaknesses { 
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(217, 119, 6, 0.2)); 
+            border: 2px solid #F59E0B; 
+        }
+        .opportunities { 
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.2)); 
+            border: 2px solid #3B82F6; 
+        }
+        .threats { 
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.2)); 
+            border: 2px solid #EF4444; 
+        }
+        
+        .competitive-table {
+            background: rgba(31, 41, 55, 0.8);
+            border-radius: 0.75rem;
+            overflow: hidden; margin: 0; padding: 1.5rem;
+        }
+        
+        .table-header {
+            background: #DC2626;
+            color: white;
+            padding: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .table-row {
+            border-bottom: 1px solid rgba(75, 85, 99, 0.3);
+            padding: 0.5rem 0.75rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        
+        .check-icon { color: #10B981; }
+        .cross-icon { color: #EF4444; }
+        .partial-icon { color: #F59E0B; }
+        
+        .unique-badge {
+            background: linear-gradient(135deg, #DC2626, #B91C1C);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; overflow: hidden;">
+    <div class="slide-container">
+        <!-- Header -->
+        <div class="mb-6 fade-in">
+            <h1 class="text-5xl font-bold red-accent mb-2">Wettbewerbsvorteile</h1>
+            <div class="w-24 h-1 red-bg mb-4"></div>
+            <p class="text-xl text-gray-300">Nachhaltige Differenzierung im Markt</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-3 gap-6 flex-1">
+            <!-- Left Column: Key Advantages -->
+            <div class="space-y-4 slide-up">
+                <div class="advantage-card">
+                    <div class="flex items-center mb-3">
+                        <div class="w-12 h-12 red-bg rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-crown text-xl text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Hyper-Nische</h3>
+                    </div>
+                    <p class="text-sm text-gray-300 mb-2">
+                        Sehr wachsender Markt durch Vielzahl von Umsiedlern + Digitalisierung
+                    </p>
+                    <span class="unique-badge">Red Ocean Vermeidung</span>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="flex items-center mb-3">
+                        <div class="w-12 h-12 red-bg rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-film text-xl text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Eigener Content-IP</h3>
+                    </div>
+                    <p class="text-sm text-gray-300 mb-2">
+                        100% eigenproduzierte Serien - 12-36 Monate Vorsprung
+                    </p>
+                    <span class="unique-badge">Kontent-Barriere</span>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="flex items-center mb-3">
+                        <div class="w-12 h-12 red-bg rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-robot text-xl text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">KI-Skalierung</h3>
+                    </div>
+                    <p class="text-sm text-gray-300 mb-2">
+                        NMT-fine-tuning für schnelle Multi-Markt-Expansion
+                    </p>
+                    <span class="unique-badge">+70% Content Re-Use</span>
+                </div>
+            </div>
+
+            <!-- Middle Column: Competitive Comparison -->
+            <div class="slide-up" style="animation-delay: 0.2s;">
+                <div class="card-dark rounded-lg p-4">
+                    <h2 class="text-xl font-bold text-white mb-4">
+                        <i class="fas fa-chart-bar red-accent mr-2"></i>
+                        Wettbewerbsvergleich
+                    </h2>
+                    
+                    <div class="competitive-table">
+                        <div class="table-header">
+                            <div class="table-row">
+                                <span>Feature</span>
+                                <span>KinoDeutsch</span>
+                                <span>Lingopie</span>
+                                <span>FluentU</span>
+                            </div>
+                        </div>
+                        
+                        <div class="text-white text-sm">
+                            <div class="table-row">
+                                <span>Eigener Content</span>
+                                <i class="fas fa-check check-icon"></i>
+                                <i class="fas fa-times cross-icon"></i>
+                                <i class="fas fa-times cross-icon"></i>
+                            </div>
+                            <div class="table-row">
+                                <span>Globale Reichweite</span>
+                                <i class="fas fa-check check-icon"></i>
+                                <i class="fas fa-check check-icon"></i>
+                                <i class="fas fa-check check-icon"></i>
+                            </div>
+                            <div class="table-row">
+                                <span>KI-Dialog-Bot</span>
+                                <i class="fas fa-check check-icon"></i>
+                                <i class="fas fa-minus partial-icon"></i>
+                                <i class="fas fa-times cross-icon"></i>
+                            </div>
+                            <div class="table-row">
+                                <span>MLM-System</span>
+                                <i class="fas fa-check check-icon"></i>
+                                <i class="fas fa-times cross-icon"></i>
+                                <i class="fas fa-times cross-icon"></i>
+                            </div>
+                            <div class="table-row">
+                                <span>Community Events</span>
+                                <i class="fas fa-check check-icon"></i>
+                                <i class="fas fa-times cross-icon"></i>
+                                <i class="fas fa-times cross-icon"></i>
+                            </div>
+                            <div class="table-row">
+                                <span>Preis/Monat</span>
+                                <span class="text-green-400">9,90€</span>
+                                <span class="text-yellow-400">12$</span>
+                                <span class="text-red-400">29$</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: SWOT Analysis -->
+            <div class="slide-up" style="animation-delay: 0.4s;">
+                <div class="card-dark rounded-lg p-4">
+                    <h2 class="text-xl font-bold text-white mb-4">
+                        <i class="fas fa-balance-scale red-accent mr-2"></i>
+                        SWOT-Analyse
+                    </h2>
+                    
+                    <div class="swot-grid">
+                        <div class="swot-card strengths">
+                            <h3 class="font-bold text-green-600 mb-3 text-lg">Stärken</h3>
+                            <ul class="text-sm text-white space-y-2">
+                                <li>• Bereits vorhandene Community</li>
+                                <li>• Aktueller Markttrend zur Steigerung</li>
+                                <li>• Starkes Network</li>
+                                <li>• 123k Instagram Follower</li>
+                                <li>• 50k Facebook Community</li>
+                                <li>• 58k TikTok Reichweite</li>
+                                <li>• Offline Kino-Abende</li>
+                                <li>• Starke emotionale Verbindung</li>
+                                <li>• Eigener Content-IP</li>
+                                <li>• Erfahrenes Gründerteam</li>
+                                <li>• Bewährte Geschäftsmodelle</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="swot-card weaknesses">
+                            <h3 class="font-bold text-yellow-600 mb-2">Schwächen</h3>
+                            <ul class="text-xs text-white space-y-1">
+                                <li>• Begrenzte Mittel</li>
+                                <li>• Kleine Team-Größe</li>
+                                <li>• Tech-Abhängigkeit</li>
+                                <li>• Content-Produktion</li>
+                                <li>• Skalierungsherausforderung</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="swot-card opportunities">
+                            <h3 class="font-bold text-blue-600 mb-2">Chancen</h3>
+                            <ul class="text-xs text-white space-y-1">
+                                <li>• Großer globaler Markt</li>
+                                <li>• Globaler Sprachlern-Trend</li>
+                                <li>• Lebende Community</li>
+                                <li>• Upsale-Möglichkeiten</li>
+                                <li>• KI-Technologie</li>
+                                <li>• Mobile-First Trend</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="swot-card threats">
+                            <h3 class="font-bold text-red-600 mb-2">Risiken</h3>
+                            <ul class="text-xs text-white space-y-1">
+                                <li>• Tech-Herausforderungen</li>
+                                <li>• Nicht aktives Nutzerverhalten</li>
+                                <li>• Regulatorische Änderungen</li>
+                                <li>• Wirtschaftliche Unsicherheit</li>
+                                <li>• Content-Produktionskosten</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Summary -->
+        <div class="mt-6 grid grid-cols-3 gap-6 fade-in" style="animation-delay: 0.6s;">
+            <div class="text-center">
+                <div class="text-3xl font-bold red-accent">6</div>
+                <div class="text-sm text-gray-400">Nachhaltige Vorteile</div>
+            </div>
+            <div class="text-center">
+                <div class="text-3xl font-bold red-accent">12-36</div>
+                <div class="text-sm text-gray-400">Monate Content-Barriere</div>
+            </div>
+            <div class="text-center">
+                <div class="text-3xl font-bold red-accent">≤12€</div>
+                <div class="text-sm text-gray-400">CAC durch MLM-System</div>
+            </div>
+        </div>
+    </div>
+<script src="navigation.js"></script></body>
+</html>
+

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="de" style="margin: 0; padding: 0; height: 100%; overflow: hidden;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produkt & Dienstleistung - KinoDeutsch</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="fixed-sizing.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden; margin: 0; padding: 1.5rem;
+        }
+        
+        .red-accent { color: #DC2626; }
+        .red-bg { background-color: #DC2626; }
+        .card-dark {
+            background: rgba(31, 41, 55, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(220, 38, 38, 0.2);
+        }
+        
+        .fade-in { animation: fadeIn 1s ease-in-out; }
+        .slide-up { animation: slideUp 0.8s ease-out; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .platform-screenshot {
+            border-radius: 0.75rem;
+            border: 2px solid #DC2626;
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .platform-screenshot:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 40px rgba(220, 38, 38, 0.5);
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, rgba(31, 41, 55, 0.8), rgba(55, 65, 81, 0.8));
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #DC2626;
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #DC2626, #B91C1C);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .netflix-badge {
+            background: linear-gradient(135deg, #E50914, #B20710);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; overflow: hidden;">
+    <div class="slide-container">
+        <!-- Header -->
+        <div class="mb-6 fade-in">
+            <h1 class="text-5xl font-bold red-accent mb-2">Produkt & Dienstleistung</h1>
+            <div class="w-24 h-1 red-bg mb-4"></div>
+            <p class="text-xl text-gray-300">KinoDeutsch - Die Revolution im Deutschlernen</p>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-2 ga flex-1">
+            <!-- Left Column: Platform Screenshots -->
+            <div class="space-y-6 slide-up">
+                <div class="card-dark rounded-lg p-6">
+                    <h2 class="text-2xl font-bold text-white mb-4">
+                        <i class="fas fa-desktop red-accent mr-2"></i>
+                        Plattform-Interface
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <img src="images/homepage.webp" 
+                             alt="KinoDeutsch Hauptseite" 
+                             class="platform-screenshot w-full">
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <img src="images/dashboard.webp" 
+                                 alt="Benutzer Dashboard" 
+                                 class="platform-screenshot w-full h-24 object-cover">
+                            <img src="images/videoplayer.webp" 
+                                 alt="Videoplayer mit Transkript" 
+                                 class="platform-screenshot w-full h-24 object-cover">
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <span class="netflix-badge">
+                            <i class="fas fa-play mr-2"></i>
+                            Netflix-ähnliches Design
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Features & USPs -->
+            <div class="space-y-4 slide-up" style="animation-delay: 0.2s;">
+                <div class="card-dark rounded-lg p-6">
+                    <h2 class="text-2xl font-bold text-white mb-6">
+                        <i class="fas fa-star red-accent mr-2"></i>
+                        Kernfunktionen
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-mouse-pointer text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-white mb-2">Interaktive Untertitel</h3>
+                            <p class="text-sm text-gray-300">Anklickbare Wörter mit sofortigen Übersetzungen, Beispielsätzen und Aussprache</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-film text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-white mb-2">Eigenproduzierte Serien</h3>
+                            <p class="text-sm text-gray-300">100% eigener Content speziell für Deutschlernende entwickelt</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-microphone text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-white mb-2">Aussprachefunktion</h3>
+                            <p class="text-sm text-gray-300">Native Speaker Audio für perfekte Aussprache</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-robot text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-white mb-2">KI-Avatare (Zukunft)</h3>
+                            <p class="text-sm text-gray-300">Interaktive Konversationen mit KI-gestützten Charakteren</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Section: USPs -->
+        <div class="mt-6 grid grid-cols-4 gap-4 fade-in" style="animation-delay: 0.4s;">
+            <div class="card-dark rounded-lg p-4 text-center">
+                <div class="w-12 h-12 red-bg rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-users text-xl text-white"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">Benutzerfreundliches UX</h3>
+                <p class="text-xs text-gray-400">Für jeden Lernenden optimierte Benutzerführung</p>
+            </div>
+            <div class="card-dark rounded-lg p-4 text-center">
+                <div class="w-12 h-12 red-bg rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-bookmark text-xl text-white"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">Persönlicher Bereich</h3>
+                <p class="text-xs text-gray-400">Vokabelspeicher und Lernfortschritt</p>
+            </div>
+            <div class="card-dark rounded-lg p-4 text-center">
+                <div class="w-12 h-12 red-bg rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-mobile-alt text-xl text-white"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">Mobile-First</h3>
+                <p class="text-xs text-gray-400">Optimiert für Smartphone-Nutzung</p>
+            </div>
+            <div class="card-dark rounded-lg p-4 text-center">
+                <div class="w-12 h-12 red-bg rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-globe text-xl text-white"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">Skalierbar</h3>
+                <p class="text-xs text-gray-400">Für alle Deutschlernende weltweit</p>
+            </div>
+        </div>
+    </div>
+<script src="navigation.js"></script></body>
+</html>
+

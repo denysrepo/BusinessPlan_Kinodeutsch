@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="de" style="margin: 0; padding: 0; height: 100%; overflow: hidden;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gründerteam - KinoDeutsch</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="fixed-sizing.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        .slide-container {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+        }
+        
+        .red-accent { color: #DC2626; }
+        .red-bg { background-color: #DC2626; }
+        .gold-accent { color: #F59E0B; }
+        .green-accent { color: #10B981; }
+        
+        .fade-in { animation: fadeIn 1s ease-in-out; }
+        .slide-up { animation: slideUp 0.8s ease-out; }
+        .pulse-success { animation: pulseSuccess 2s ease-in-out infinite; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes pulseSuccess {
+            0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.6); }
+        }
+        
+        .founder-card {
+            background: linear-gradient(135deg, rgba(31, 41, 55, 0.95), rgba(55, 65, 81, 0.95));
+            border: 2px solid rgba(220, 38, 38, 0.4);
+            border-radius: 1.5rem;
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            height: fit-content;
+            max-height: 70vh;
+        }
+        
+        .role-highlight {
+            background: linear-gradient(135deg, #DC2626, #B91C1C);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 1rem;
+            text-align: center;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .success-metric {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            border-radius: 0.75rem;
+            padding: 0.6rem;
+            margin: 0.3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .success-metric .text-2xl {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+        }
+        
+        .success-metric .text-sm {
+            font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+        }
+        
+        .achievement-badge {
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            color: #F59E0B;
+            border-radius: 0.5rem;
+            padding: 0.2rem 0.4rem;
+            margin: 0.1rem;
+            display: inline-block;
+            font-size: 0.6rem;
+            font-weight: 600;
+        }
+        
+        .track-record {
+            background: rgba(55, 65, 81, 0.6);
+            border-radius: 0.5rem;
+            padding: 0.6rem;
+            margin-top: 0.6rem;
+            font-size: 0.7rem;
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; height: 100vh; overflow: hidden;">
+    <div class="slide-container">
+        <div class="content-wrapper">
+            <!-- Header -->
+            <div class="text-center mb-3 fade-in">
+                <h1 class="slide-title font-bold red-accent">
+                    <i class="fas fa-star gold-accent mr-2"></i>
+                    Dream Team mit bewiesenem Erfolg
+                    <i class="fas fa-star gold-accent ml-2"></i>
+                </h1>
+                <div class="w-32 h-1 bg-gradient-to-r from-red-600 via-yellow-500 to-green-500 mx-auto mb-2"></div>
+                <p class="slide-text text-gray-300">
+                    <span class="green-accent font-bold">874.000€ Umsatz</span> • 
+                    <span class="gold-accent font-bold">Schnelles Wachstum</span> • 
+                    <span class="red-accent font-bold">97% Konversion</span>
+                </p>
+            </div>
+
+            <!-- Founders Grid -->
+            <div class="responsive-grid grid-2-cols flex-1 slide-up">
+                <!-- Anastasiia Repetylo -->
+                <div class="founder-card pulse-success">
+                    <img src="images/anastasiia.jpeg" alt="Anastasiia Repetylo" class="founder-image">
+                    
+                    <div class="role-highlight">
+                        <i class="fas fa-magic mr-1"></i>
+                        Marketing-Genie & Brand-Visionärin
+                    </div>
+                    
+                    <h2 class="text-lg font-bold text-white mb-1">Anastasiia Repetylo</h2>
+                    <p class="text-center gold-accent text-xs font-semibold mb-2">
+                        <i class="fas fa-crown mr-1"></i>
+                        Chief Marketing Officer & Co-Gründerin
+                    </p>
+                    
+                    <div class="success-metric">
+                        <div class="text-2xl font-bold">100.000+</div>
+                        <div class="text-sm">Instagram Community</div>
+                    </div>
+                    
+                    <div class="success-metric">
+                        <div class="text-2xl font-bold">15.000€</div>
+                        <div class="text-sm">Monatseinkommen (Digital)</div>
+                    </div>
+                    
+                    <div class="success-metric">
+                        <div class="text-2xl font-bold">97%</div>
+                        <div class="text-sm">Konversionsrate (Jobmessen)</div>
+                    </div>
+                    
+                    <div class="track-record">
+                        <div class="text-xs green-accent font-bold mb-1">
+                            <i class="fas fa-check-circle mr-1"></i>
+                            BEWIESENE MARKETING-MACHT
+                        </div>
+                        <div class="text-xs text-gray-300">
+                            Master-Abschluss • Head of Marketing bei 874k€ Unternehmen • 
+                            Influencer mit 6-stelliger Community • Charismatische Rednerin
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-1 mt-2">
+                        <div class="achievement-badge">Master-Abschluss</div>
+                        <div class="achievement-badge">Viral Marketing</div>
+                        <div class="achievement-badge">Community Queen</div>
+                        <div class="achievement-badge">Sales Genius</div>
+                    </div>
+                </div>
+
+                <!-- Denys Repetylo -->
+                <div class="founder-card pulse-success" style="animation-delay: 0.2s;">
+                    <img src="images/denys.jpeg" alt="Denys Repetylo" class="founder-image">
+                    
+                    <div class="role-highlight">
+                        <i class="fas fa-cogs mr-1"></i>
+                        Execution-Master & Scale-Experte
+                    </div>
+                    
+                    <h2 class="text-lg font-bold text-white mb-1">Denys Repetylo</h2>
+                    <p class="text-center gold-accent text-xs font-semibold mb-2">
+                        <i class="fas fa-crown mr-1"></i>
+                        Chief Executive Officer & Co-Gründer
+                    </p>
+                    
+                    <div class="success-metric">
+                        <div class="text-2xl font-bold">874.000€</div>
+                        <div class="text-sm">Jahresumsatz 2024</div>
+                    </div>
+                    
+                    <div class="success-metric">
+                        <div class="text-2xl font-bold">Schnell</div>
+                        <div class="text-sm">Wachstum durch Systeme</div>
+                    </div>
+                    
+                    <div class="success-metric">
+                        <div class="text-2xl font-bold">50</div>
+                        <div class="text-sm">Team-Mitglieder (3→50)</div>
+                    </div>
+                    
+                    <div class="track-record">
+                        <div class="text-xs green-accent font-bold mb-1">
+                            <i class="fas fa-check-circle mr-1"></i>
+                            BEWIESENE SKALIERUNGS-KRAFT
+                        </div>
+                        <div class="text-xs text-gray-300">
+                            15+ Jahre Deutschland • Ex-Leistungssportler • 
+                            Palianitschka Schule: 83k→874k€ • Systematischer Team-Builder
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-1 mt-2">
+                        <div class="achievement-badge">Scale-Master</div>
+                        <div class="achievement-badge">CEO-Erfahrung</div>
+                        <div class="achievement-badge">Team-Builder</div>
+                        <div class="achievement-badge">Growth-Hacker</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Success Formula -->
+            <div class="text-center mt-3 fade-in" style="animation-delay: 1s;">
+                <h3 class="text-lg font-bold text-white mb-2">
+                    <span class="bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 bg-clip-text text-transparent">
+                        Unsere Stärken
+                    </span>
+                </h3>
+                <p class="text-sm text-gray-300">
+                    <span class="red-accent font-bold">Marketing-Genie</span> + 
+                    <span class="green-accent font-bold">Execution-Master</span> = 
+                    <span class="gold-accent font-bold">KinoDeutsch Erfolg</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="navigation.js"></script>
+</body>
+</html>
+
