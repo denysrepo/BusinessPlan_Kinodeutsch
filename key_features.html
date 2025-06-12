@@ -51,6 +51,25 @@
             justify-content: center;
             margin-bottom: 0.5rem;
         }
+
+        .img-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+        }
+
+        .img-overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 0.5rem;
+        }
     </style>
 </head>
 <body style="margin: 0; padding: 0; height: 100vh; overflow: hidden;">
@@ -65,6 +84,7 @@
                 </h1>
                 <div class="w-24 h-1 red-bg mx-auto mb-2"></div>
                 <p class="slide-text text-gray-300">Innovative Features für effektives Deutschlernen</p>
+                <p class="text-xs text-gray-400 mt-1">Klicke auf die Bilder, um sie zu vergrößern.</p>
             </div>
 
             <!-- Main Features Grid -->
@@ -163,9 +183,102 @@
                     <p class="text-xs text-gray-400">MLM-Referral</p>
                 </div>
             </div>
+
+            <div class="text-center mt-4">
+                <button id="tryButton" class="px-4 py-2 bg-red-600 text-white rounded">Selber ausprobieren</button>
+            </div>
+
+            <div id="example" class="mt-8 card-dark p-4">
+                <h2 class="text-lg font-bold text-white mb-4">Beispiel</h2>
+                <div class="flex flex-col md:flex-row md:space-x-4 items-start">
+                    <div>
+                        <div class="bg-gray-700 w-72 h-40 flex items-center justify-center rounded">
+                            <span class="text-gray-400">Videoplayer</span>
+                        </div>
+                        <div id="subtitles" class="mt-2 text-white text-sm space-x-2">
+                            <span class="subtitle-word cursor-pointer" data-word="Hallo">Hallo</span>
+                            <span class="subtitle-word cursor-pointer" data-word="Freunde">Freunde</span>
+                        </div>
+                    </div>
+                    <div id="transcript" class="mt-4 md:mt-0 text-gray-300 text-sm border-l border-gray-600 pl-4">
+                        <p><span class="transcript-word cursor-pointer" data-word="Hallo">Hallo</span> <span class="transcript-word cursor-pointer" data-word="Freunde">Freunde</span>, willkommen!</p>
+                    </div>
+                </div>
+                <button id="backButton" class="mt-4 px-4 py-2 bg-red-600 text-white rounded">Вернутися назад</button>
+            </div>
         </div>
     </div>
+    <div class="img-overlay" id="imgOverlay">
+        <img id="overlayImg" src="#" alt="Enlarged">
+    </div>
+
+    <div class="img-overlay" id="wordModal">
+        <div class="bg-gray-800 text-white p-4 rounded max-w-sm">
+            <div id="wordModalText" class="text-xl font-bold mb-2"></div>
+            <div class="text-sm mb-2">
+                <b>Beispiele:</b>
+                <ul id="wordExamples" class="list-disc pl-4 space-y-1">
+                    <li>Beispiel 1</li>
+                    <li>Beispiel 2</li>
+                </ul>
+            </div>
+            <div class="text-sm mb-2">
+                <b>Mini Aufgaben:</b>
+                <ol class="list-decimal pl-4 space-y-1">
+                    <li>Konjugiere das Wort</li>
+                    <li>Satz mit dem Wort schreiben</li>
+                    <li>Kurzes Video finden</li>
+                </ol>
+            </div>
+            <div class="text-sm mb-4"><b>Video Beispiele:</b> <span>[5-7 Sek Clips]</span></div>
+            <div class="flex justify-end space-x-2">
+                <button id="playPronounce" class="bg-red-600 px-2 py-1 rounded">🔊</button>
+                <button id="wordModalClose" class="bg-gray-600 px-2 py-1 rounded">Schließen</button>
+            </div>
+        </div>
+    </div>
+
     <script src="navigation.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const overlay = document.getElementById('imgOverlay');
+        const overlayImg = document.getElementById('overlayImg');
+        document.querySelectorAll('.screenshot-showcase').forEach(img => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', () => {
+                overlayImg.src = img.src;
+                overlay.style.display = 'flex';
+            });
+        });
+        overlay.addEventListener('click', () => overlay.style.display = 'none');
+
+        document.getElementById('tryButton').addEventListener('click', () => {
+            document.getElementById('example').scrollIntoView({behavior:'smooth'});
+        });
+        document.getElementById('backButton').addEventListener('click', () => {
+            document.querySelector('.slide-container').scrollIntoView({behavior:'smooth'});
+        });
+
+        let wordCount = 0;
+        const wordModal = document.getElementById('wordModal');
+        const modalText = document.getElementById('wordModalText');
+        document.querySelectorAll('.subtitle-word, .transcript-word').forEach(w => {
+            w.addEventListener('click', () => {
+                wordCount++;
+                alert(`${w.dataset.word} ins Wörterbuch hinzugefügt (#${wordCount})`);
+                modalText.textContent = w.dataset.word;
+                wordModal.style.display = 'flex';
+            });
+        });
+        document.getElementById('wordModalClose').addEventListener('click', () => {
+            wordModal.style.display = 'none';
+        });
+        document.getElementById('playPronounce').addEventListener('click', () => {
+            const utter = new SpeechSynthesisUtterance(modalText.textContent);
+            speechSynthesis.speak(utter);
+        });
+    });
+    </script>
 </body>
 </html>
 
