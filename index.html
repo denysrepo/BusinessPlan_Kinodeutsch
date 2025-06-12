@@ -196,7 +196,51 @@
             font-size: 0.9rem;
             color: #9CA3AF;
         }
-        
+
+        .impact-stat {
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .impact-stat:hover {
+            background: rgba(220, 38, 38, 0.2);
+            border-color: #DC2626;
+            transform: scale(1.05);
+        }
+
+        .img-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+        }
+
+        .img-overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 0.5rem;
+        }
+
+        .road-item {
+            min-width: 150px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .road-item:hover {
+            transform: scale(1.05);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .section {
@@ -263,22 +307,26 @@
                         mit lebendigem gesprochenem Deutsch, <span class="red-accent font-bold">die im Alltag wirklich notwendig ist</span>, 
                         und <span class="red-accent font-bold">sofortiger Wort-Reaktion</span>.
                     </p>
-                    <div class="grid-4">
-                        <div class="text-center">
-                            <div class="text-red-500 font-bold">Sicher</div>
-                            <div class="text-sm text-gray-400">Lernraum</div>
+                    <div class="grid grid-cols-4 gap-4 mt-8 text-center">
+                        <div class="impact-stat">
+                            <i class="fas fa-shield-alt text-2xl red-accent mb-1"></i>
+                            <div class="text-lg font-semibold text-white">Sicher</div>
+                            <div class="text-xs text-gray-400">Lernraum</div>
                         </div>
-                        <div class="text-center">
-                            <div class="text-red-500 font-bold">Alltag</div>
-                            <div class="text-sm text-gray-400">Notwendig</div>
+                        <div class="impact-stat">
+                            <i class="fas fa-home text-2xl red-accent mb-1"></i>
+                            <div class="text-lg font-semibold text-white">Alltag</div>
+                            <div class="text-xs text-gray-400">Notwendig</div>
                         </div>
-                        <div class="text-center">
-                            <div class="text-red-500 font-bold">Sofort</div>
-                            <div class="text-sm text-gray-400">Verständnis</div>
+                        <div class="impact-stat">
+                            <i class="fas fa-bolt text-2xl red-accent mb-1"></i>
+                            <div class="text-lg font-semibold text-white">Sofort</div>
+                            <div class="text-xs text-gray-400">Verständnis</div>
                         </div>
-                        <div class="text-center">
-                            <div class="text-red-500 font-bold">Liebe</div>
-                            <div class="text-sm text-gray-400">zur Sprache</div>
+                        <div class="impact-stat">
+                            <i class="fas fa-heart text-2xl red-accent mb-1"></i>
+                            <div class="text-lg font-semibold text-white">Liebe</div>
+                            <div class="text-xs text-gray-400">zur Sprache</div>
                         </div>
                     </div>
                 </div>
@@ -288,7 +336,10 @@
                         <i class="fas fa-rocket mr-2"></i>Mission
                     </h3>
                     <p class="text-lg mb-4 text-center red-accent font-bold">
-                        Für alle Deutschlernende den Alltag erleichtern.
+                        Für alle Deutschlernende den Alltag
+                        sicherer,
+                        <span class="red-accent font-bold">sofort verständlich</span>
+                        und mit Liebe zur Sprache erleichtern.
                     </p>
                     <div class="grid-3">
                         <div class="text-center">
@@ -315,6 +366,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -484,6 +536,7 @@
         <div class="container fade-in">
             <h2 class="section-title">Hauptfunktionen</h2>
             <p class="section-subtitle">Innovative Features für effektives Deutschlernen</p>
+            <p class="text-xs text-gray-400 mt-1">Klicke auf die Bilder, um sie zu vergrößern.</p>
             
             <div class="grid-2">
                 <!-- Left Column -->
@@ -566,6 +619,59 @@
                     </div>
                     <h4 class="font-semibold mb-1">Community</h4>
                     <p class="text-sm text-gray-400">MLM-Referral</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <button id="tryButton" class="px-4 py-2 bg-red-600 text-white rounded">Selber ausprobieren</button>
+            </div>
+
+            <div id="example" class="mt-8 card p-4">
+                <h2 class="text-lg font-bold text-white mb-4">Beispiel</h2>
+                <div class="flex flex-col md:flex-row md:space-x-4 items-start">
+                    <div>
+                        <div class="bg-gray-700 w-72 h-40 flex items-center justify-center rounded">
+                            <span class="text-gray-400">Videoplayer</span>
+                        </div>
+                        <div id="subtitles" class="mt-2 text-white text-sm space-x-2">
+                            <span class="subtitle-word cursor-pointer" data-word="Hallo">Hallo</span>
+                            <span class="subtitle-word cursor-pointer" data-word="Freunde">Freunde</span>
+                        </div>
+                    </div>
+                    <div id="transcript" class="mt-4 md:mt-0 text-gray-300 text-sm border-l border-gray-600 pl-4">
+                        <p><span class="transcript-word cursor-pointer" data-word="Hallo">Hallo</span> <span class="transcript-word cursor-pointer" data-word="Freunde">Freunde</span>, willkommen!</p>
+                    </div>
+                </div>
+                <button id="backButton" class="mt-4 px-4 py-2 bg-red-600 text-white rounded">Вернутися назад</button>
+            </div>
+
+            <div class="img-overlay" id="imgOverlay">
+                <img id="overlayImg" src="#" alt="Enlarged">
+            </div>
+
+            <div class="img-overlay" id="wordModal">
+                <div class="bg-gray-800 text-white p-4 rounded max-w-sm">
+                    <div id="wordModalText" class="text-xl font-bold mb-2"></div>
+                    <div class="text-sm mb-2">
+                        <b>Beispiele:</b>
+                        <ul id="wordExamples" class="list-disc pl-4 space-y-1">
+                            <li>Beispiel 1</li>
+                            <li>Beispiel 2</li>
+                        </ul>
+                    </div>
+                    <div class="text-sm mb-2">
+                        <b>Mini Aufgaben:</b>
+                        <ol class="list-decimal pl-4 space-y-1">
+                            <li>Konjugiere das Wort</li>
+                            <li>Satz mit dem Wort schreiben</li>
+                            <li>Kurzes Video finden</li>
+                        </ol>
+                    </div>
+                    <div class="text-sm mb-4"><b>Video Beispiele:</b> <span>[5-7 Sek Clips]</span></div>
+                    <div class="flex justify-end space-x-2">
+                        <button id="playPronounce" class="bg-red-600 px-2 py-1 rounded">🔊</button>
+                        <button id="wordModalClose" class="bg-gray-600 px-2 py-1 rounded">Schließen</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -682,14 +788,14 @@
                     </ul>
                 </div>
                 
-                <!-- Premium -->
+                <!-- Jahresmitgliedschaft -->
                 <div class="card text-center border-2 border-red-500">
                     <div class="w-16 h-16 gold-bg rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-crown text-2xl text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold gold-accent mb-2">Premium</h3>
-                    <div class="text-3xl font-bold text-white mb-2">39,99€</div>
-                    <div class="text-sm text-gray-400 mb-4">pro Monat</div>
+                    <h3 class="text-xl font-bold gold-accent mb-2">Jahresmitgliedschaft</h3>
+                    <div class="text-3xl font-bold text-white mb-2">99€</div>
+                    <div class="text-sm text-gray-400 mb-4">pro Jahr • ca. 17% günstiger</div>
                     <ul class="text-sm text-left space-y-1">
                         <li><i class="fas fa-check green-accent mr-2"></i>Alles aus Basic</li>
                         <li><i class="fas fa-check green-accent mr-2"></i>KI-Dialog Partner</li>
@@ -697,7 +803,8 @@
                         <li><i class="fas fa-check green-accent mr-2"></i>Zertifikate</li>
                     </ul>
                 </div>
-                
+                <p class="mt-2 text-xs text-green-400">Mit der Jahresmitgliedschaft sparst du rund 17% gegenüber dem Monatsabo.</p>
+
                 <!-- Corporate -->
                 <div class="card text-center">
                     <div class="w-16 h-16 red-bg rounded-full flex items-center justify-center mx-auto mb-4">
@@ -739,9 +846,38 @@
                     <div class="text-center">
                         <div class="text-2xl font-bold green-accent">Jahr 5</div>
                         <div class="text-lg text-white">12.000.000€</div>
-                        <div class="text-sm text-gray-400">100.000 Nutzer</div>
+                    <div class="text-sm text-gray-400">100.000 Nutzer</div>
                     </div>
                 </div>
+            </div>
+
+            <div class="mt-8 w-full" id="roadmap">
+                <h2 class="text-xl font-bold text-white mb-4">Roadmap</h2>
+                <div class="flex space-x-4 overflow-x-auto pb-2">
+                    <div class="road-item cursor-pointer bg-gray-800 p-4 rounded" data-info="MVP Start Anfang November">
+                        <div class="font-semibold">MVP</div>
+                        <div class="text-xs text-gray-400">Nov</div>
+                    </div>
+                    <div class="road-item cursor-pointer bg-gray-800 p-4 rounded" data-info="Februar 2026: Zielgruppe russischsprachige Kunden">
+                        <div class="font-semibold">Zielgruppe erweitern</div>
+                        <div class="text-xs text-gray-400">Feb 2026</div>
+                    </div>
+                    <div class="road-item cursor-pointer bg-gray-800 p-4 rounded" data-info="März-April 2026: KI Avatare von Schauspielern">
+                        <div class="font-semibold">KI-Avatare</div>
+                        <div class="text-xs text-gray-400">März-April 26</div>
+                    </div>
+                    <div class="road-item cursor-pointer bg-gray-800 p-4 rounded" data-info="2026: Content auf 3000h erhöhen, Fokus Serien und Shows">
+                        <div class="font-semibold">3000h Content</div>
+                        <div class="text-xs text-gray-400">2026</div>
+                    </div>
+                    <div class="road-item cursor-pointer bg-gray-800 p-4 rounded" data-info="Interaktive Serie mit drei Enden">
+                        <div class="font-semibold">Interaktive Serie</div>
+                        <div class="text-xs text-gray-400">bis Ende 26</div>
+                    </div>
+                </div>
+            </div>
+            <div class="img-overlay" id="roadmapOverlay">
+                <div class="bg-gray-800 text-white p-4 rounded max-w-sm" id="roadmapText"></div>
             </div>
         </div>
     </section>
@@ -1109,6 +1245,62 @@
             section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(section);
         });
+
+        // Image lightbox
+        const imgOverlay = document.getElementById('imgOverlay');
+        const overlayImg = document.getElementById('overlayImg');
+        document.querySelectorAll('.screenshot').forEach(img => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', () => {
+                overlayImg.src = img.src;
+                imgOverlay.style.display = 'flex';
+            });
+        });
+        if (imgOverlay) {
+            imgOverlay.addEventListener('click', () => imgOverlay.style.display = 'none');
+        }
+
+        const tryBtn = document.getElementById('tryButton');
+        const backBtn = document.getElementById('backButton');
+        if (tryBtn && backBtn) {
+            tryBtn.addEventListener('click', () => {
+                document.getElementById('example').scrollIntoView({behavior:'smooth'});
+            });
+            backBtn.addEventListener('click', () => {
+                document.getElementById('features').scrollIntoView({behavior:'smooth'});
+            });
+        }
+
+        let wordCount = 0;
+        const wordModal = document.getElementById('wordModal');
+        const modalText = document.getElementById('wordModalText');
+        document.querySelectorAll('.subtitle-word, .transcript-word').forEach(w => {
+            w.addEventListener('click', () => {
+                wordCount++;
+                alert(`${w.dataset.word} ins Wörterbuch hinzugefügt (#${wordCount})`);
+                modalText.textContent = w.dataset.word;
+                wordModal.style.display = 'flex';
+            });
+        });
+        if (wordModal) {
+            document.getElementById('wordModalClose').addEventListener('click', () => wordModal.style.display = 'none');
+            document.getElementById('playPronounce').addEventListener('click', () => {
+                const utter = new SpeechSynthesisUtterance(modalText.textContent);
+                speechSynthesis.speak(utter);
+            });
+        }
+
+        const roadmapOverlay = document.getElementById('roadmapOverlay');
+        const roadmapText = document.getElementById('roadmapText');
+        document.querySelectorAll('.road-item').forEach(item => {
+            item.addEventListener('click', () => {
+                roadmapText.textContent = item.dataset.info;
+                roadmapOverlay.style.display = 'flex';
+            });
+        });
+        if (roadmapOverlay) {
+            roadmapOverlay.addEventListener('click', () => roadmapOverlay.style.display = 'none');
+        }
     </script>
 </body>
 </html>
