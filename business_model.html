@@ -124,6 +124,29 @@
             background: rgba(220, 38, 38, 0.2);
             border-color: #DC2626;
         }
+
+        .road-item {
+            min-width: 150px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .road-item:hover {
+            transform: scale(1.05);
+        }
+
+        .img-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+        }
     </style>
 </head>
 <body style="margin: 0; padding: 0; overflow: hidden;">
@@ -165,13 +188,15 @@
                             <span>Flexibilität</span>
                         </div>
                         <div class="table-row">
-                            <span>Jährlich</span>
+                            <span>Jahresmitgliedschaft</span>
                             <span class="text-green-400">99€</span>
-                            <span>17% Rabatt</span>
+                            <span>ca. 17% günstiger</span>
                         </div>
                     </div>
                 </div>
-                
+
+                <p class="mt-2 text-xs text-green-400">Mit der Jahresmitgliedschaft sparst du rund 17% gegenüber dem Monatsabo.</p>
+
                 <div class="mt-4 text-xs text-gray-400">
                     <p><strong>Zusatzoptionen (ab Phase 2):</strong></p>
                     <p>• Familien-Paket: 149€/Jahr (3 Profile)</p>
@@ -317,7 +342,50 @@
                 <div class="text-xs text-gray-400">LTV Ziel</div>
             </div>
         </div>
+
+        <div class="mt-8 w-full" id="roadmap">
+            <h2 class="text-xl font-bold text-white mb-4">Roadmap</h2>
+            <div class="flex space-x-4 overflow-x-auto pb-2">
+                <div class="road-item cursor-pointer bg-gray-800 p-4 rounded" data-info="MVP Start Anfang November">
+                    <div class="font-semibold">MVP</div>
+                    <div class="text-xs text-gray-400">Nov</div>
+                </div>
+                <div class="road-item cursor-pointer bg-gray-800 p-4 rounded" data-info="Februar 2026: Zielgruppe russischsprachige Kunden">
+                    <div class="font-semibold">Zielgruppe erweitern</div>
+                    <div class="text-xs text-gray-400">Feb 2026</div>
+                </div>
+                <div class="road-item cursor-pointer bg-gray-800 p-4 rounded" data-info="März-April 2026: KI Avatare von Schauspielern">
+                    <div class="font-semibold">KI-Avatare</div>
+                    <div class="text-xs text-gray-400">März-April 26</div>
+                </div>
+                <div class="road-item cursor-pointer bg-gray-800 p-4 rounded" data-info="2026: Content auf 3000h erhöhen, Fokus Serien und Shows">
+                    <div class="font-semibold">3000h Content</div>
+                    <div class="text-xs text-gray-400">2026</div>
+                </div>
+                <div class="road-item cursor-pointer bg-gray-800 p-4 rounded" data-info="Interaktive Serie mit drei Enden">
+                    <div class="font-semibold">Interaktive Serie</div>
+                    <div class="text-xs text-gray-400">bis Ende 26</div>
+                </div>
+            </div>
+        </div>
     </div>
-<script src="navigation.js"></script></body>
+    <div class="img-overlay" id="roadmapOverlay">
+        <div class="bg-gray-800 text-white p-4 rounded max-w-sm" id="roadmapText"></div>
+    </div>
+<script src="navigation.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('roadmapOverlay');
+    const text = document.getElementById('roadmapText');
+    document.querySelectorAll('.road-item').forEach(item => {
+        item.addEventListener('click', () => {
+            text.textContent = item.dataset.info;
+            overlay.style.display = 'flex';
+        });
+    });
+    overlay.addEventListener('click', () => overlay.style.display = 'none');
+});
+</script>
+</body>
 </html>
 
