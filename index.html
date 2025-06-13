@@ -197,6 +197,20 @@
             color: #9CA3AF;
         }
 
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0.25rem;
+            font-size: 1.1rem;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.1);
+            color: #F59E0B;
+        }
+
         .impact-stat {
             background: rgba(220, 38, 38, 0.1);
             border: 1px solid rgba(220, 38, 38, 0.3);
@@ -408,13 +422,19 @@
                     
                     <div class="grid-3">
                         <div class="metric">
-                            <div class="metric-value">
-                                100.000+
-                                <a href="https://www.instagram.com/palyanichka.deutsch/" target="_blank" class="ml-2 text-pink-500 hover:text-pink-400">
-                                    <i class="fab fa-instagram"></i>
+                            <div class="metric-value">100.000+</div>
+                            <div class="metric-label">Follower</div>
+                            <div class="social-icons mt-2 space-x-2 text-sm justify-center flex">
+                                <a href="https://www.instagram.com/palyanichka.deutsch/" target="_blank" class="text-pink-500" title="Instagram 100k">
+                                    <i class="fab fa-instagram"></i><span class="ml-1">100k</span>
+                                </a>
+                                <a href="https://www.tiktok.com/@palyanichka.deutsch?_t=ZN-8xAh6MnzjSo&_r=1" target="_blank" class="text-gray-200" title="TikTok 58k">
+                                    <i class="fab fa-tiktok"></i><span class="ml-1">58k</span>
+                                </a>
+                                <a href="https://www.facebook.com/Palyanichka.deutsch/" target="_blank" class="text-blue-600" title="Facebook 53k">
+                                    <i class="fab fa-facebook"></i><span class="ml-1">53k</span>
                                 </a>
                             </div>
-                            <div class="metric-label">Follower</div>
                         </div>
                         <div class="metric">
                             <div class="metric-value">15.000€</div>
@@ -449,7 +469,9 @@
                     <div class="grid-3">
                         <div class="metric">
                             <div class="metric-value">874.000€</div>
-                            <div class="metric-label">Jahresumsatz 2024 bei pl-schule.de</div>
+                            <div class="metric-label">Jahresumsatz 2024 bei
+                                <a href="https://pl-schule.de" target="_blank" class="underline hover:text-red-400">pl-schule.de</a>
+                            </div>
                         </div>
                         <div class="metric">
                             <div class="metric-value">Systemisch</div>
