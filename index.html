@@ -246,14 +246,26 @@
             .section {
                 padding: 2rem 1rem;
             }
-            
+
             .nav-links {
                 gap: 1rem;
             }
-            
+
             .nav-link {
                 font-size: 0.8rem;
                 padding: 0.3rem 0.6rem;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
@@ -377,8 +389,8 @@
         <div class="container fade-in">
             <h2 class="section-title">Dream Team mit bewiesenem Erfolg</h2>
             <p class="section-subtitle">
-                <span class="green-accent font-bold">874.000€ Umsatz</span> • 
-                <span class="gold-accent font-bold">Schnelles Wachstum</span> • 
+                <span class="green-accent font-bold">874.000€ Umsatz</span> •
+                <span class="gold-accent font-bold">Schnelles Wachstum</span> •
                 <span class="red-accent font-bold">97% Konversion</span>
             </p>
             
@@ -396,8 +408,13 @@
                     
                     <div class="grid-3">
                         <div class="metric">
-                            <div class="metric-value">100.000+</div>
-                            <div class="metric-label">Instagram Community</div>
+                            <div class="metric-value">
+                                100.000+
+                                <a href="https://www.instagram.com/palyanichka.deutsch/" target="_blank" class="ml-2 text-pink-500 hover:text-pink-400">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                            <div class="metric-label">Follower</div>
                         </div>
                         <div class="metric">
                             <div class="metric-value">15.000€</div>
@@ -432,7 +449,7 @@
                     <div class="grid-3">
                         <div class="metric">
                             <div class="metric-value">874.000€</div>
-                            <div class="metric-label">Jahresumsatz 2024</div>
+                            <div class="metric-label">Jahresumsatz 2024 bei pl-schule.de</div>
                         </div>
                         <div class="metric">
                             <div class="metric-value">Systemisch</div>
@@ -454,9 +471,6 @@
                     </div>
                 </div>
             </div>
-            <p class="text-center mt-6">
-                <a href="https://pl-schule.de" class="text-blue-400 underline">pl-schule.de</a>
-            </p>
         </div>
     </section>
 
